@@ -7,7 +7,7 @@
  * In the class CounterSync, the keyword "synchronized" is added to its
  * increment() method. As there's only one lock for an object, all 128 threads
  * have to aqcuire the lock before entering into this method. So there's only
- * one thread increasing the count variable each time.
+ * one thread increasing the count variable at a time.
  */
 
 public class CounterTest {
