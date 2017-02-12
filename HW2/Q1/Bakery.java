@@ -3,6 +3,10 @@ public class Bakery implements Lock {
   private int[] label;
 
   public Bakery(int n) {
+    if (n <= 0) {
+      System.out.println("Number of threads must be larger than 0!");
+      System.exit(0);
+    }
     flag = new boolean[n];
     label = new int[n];
     for (int i = 0; i < n; i++) {
@@ -31,7 +35,8 @@ public class Bakery implements Lock {
        }
 
        while (flag[k]) {
-         if (label[i] < label[k] || i < k) {
+         // If the current thread has a smaller lexicographical order, proceed
+         if (label[i] < label[k] || (label[i] == label[k] && i < k)) {
            // If there are no raising flags with smaller labels, we can proceed
            break;
          }
@@ -48,12 +53,12 @@ public class Bakery implements Lock {
    * Helper function to find the maximum value in an array
    */
   private int maxArray(int[] arr) {
-    int max = arr[0];
+    int maxVal = arr[0];
     for (int i = 1; i < arr.length; i++) {
-      if (max < arr[i]) {
-        max = arr[i];
+      if (maxVal < arr[i]) {
+        maxVal = arr[i];
       }
     }
-    return max;
+    return maxVal;
   }
 }

@@ -32,6 +32,10 @@ public class Counter implements Runnable {
   private Lock lock;    // Use lock implemented in Backery algorithm
 
   public Counter(int n) {
+    if (n <= 0) {
+      System.out.println("Invalid number of threads!");
+      System.exit(0);
+    }
     value = 0;
     lock = new Bakery(n);
   }
