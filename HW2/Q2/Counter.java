@@ -8,7 +8,7 @@
 
 public class Counter implements Runnable {
   public static void main(String[] args) {
-    int n = 4;    // Number of threads to be run
+    int n = 64;    // *****Number of threads to be run******
     Counter job = new Counter(n); // Create a runnable Counter object
     Thread[] worker = new Thread[n];
     for (int i = 0; i < n; i++) {
@@ -26,10 +26,11 @@ public class Counter implements Runnable {
         ex.printStackTrace();
       }
     }
+    System.out.println(" ");
   }
 
   private long value;
-  private Lock lock;    // Use lock implemented in Backery algorithm
+  private Lock lock;
 
   public Counter(int n) {
     if (n <= 0) {
@@ -37,14 +38,15 @@ public class Counter implements Runnable {
       System.exit(0);
     }
     value = 0;
-    lock = new NPeter(n);
+    lock = new TreeLock(n);	// *****Change Lock here*****
   }
 
   public void run() {
-    int repeat = 20;    // Repeat times for a thread calling getAndIncrement()
+     // *****Repeat times for a thread to call getAndIncrement()*****
+    int repeat = 10;
     for (int i = 0; i < repeat; i++) {
-      System.out.println("Thread(" + Thread.currentThread().getName() + ")--" +
-        "Run(" + i + "):\t" + getAndIncrement());
+      System.out.println("Thread(" + Thread.currentThread().getName() + "):\t"
+        + getAndIncrement());
     }
   }
 
