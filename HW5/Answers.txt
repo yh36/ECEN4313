@@ -1,0 +1,10 @@
+Q3:
+The biggest advantage of the new scheme is that same operation collision, which
+may happen in EliminationArray where push() or pop() may exchange with another
+push() or pop() respectively. But this scheme wastes a lot of memory as previous
+slots are not reused, and arrays keep growing with more stack operations. In
+addition, the exchange scheme is highly dependent on the number of history
+history operations. It can only have a high parallelism when both numbers of
+previous push() and pop() operations are similar; otherwise, it's hard for them
+to meet at the same slots. In a word, EliminationArray has more parallelism
+along with a good range policy.
